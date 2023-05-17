@@ -1,0 +1,38 @@
+.score-board {
+    background-color: #f9fafb;
+    text-align: center;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    min-width: 300px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+  
+  .score-board__player-name {
+    color: #1a202c;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  
+  .score-board__score {
+    color: #03a01b;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .score-board__error {
+    color: #e53e3e;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .score-board__winner {
+    color: #38a169;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    padding: 1rem;
+    background-color: #edf2f7;
+    border-radius: 0.5rem;
+  }
+  

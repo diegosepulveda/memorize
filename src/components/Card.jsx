@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { flipCard, checkMatch } from "../redux/gameSlice";
+import { flipCard, checkMatch, checkGameState } from "../redux/gameSlice";
 
 function Card({ card }) {
   const dispatch = useDispatch();
@@ -7,6 +7,7 @@ function Card({ card }) {
   const handleCardClick = () => {
     dispatch(flipCard(card.uuid));
     dispatch(checkMatch());
+    dispatch(checkGameState());
   };
 
   return (

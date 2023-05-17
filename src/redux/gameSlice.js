@@ -5,7 +5,7 @@ export const fetchCards = createAsyncThunk("game/fetchCards", async () => {
     "https://fed-team.modyo.cloud/api/content/spaces/animals/types/game/entries?per_page=20"
   );
   const data = await response.json();
-  return data.entries;
+  return data.entries.slice(-4);
 });
 
 function findDuplicateCard(cards) {
@@ -47,7 +47,7 @@ const gameSlice = createSlice({
     cards: [],
     flippedCards: [],
     matchCards: [],
-    gameState: "idle", // idle, playing, finished
+    gameState: "playing", // playing, finished
   },
   reducers: {
     setPlayerName: (state, action) => {
@@ -57,7 +57,7 @@ const gameSlice = createSlice({
     flipCard: (state, action) => {
       const cardId = action.payload;
       const card = state.cards.find((card) => card.uuid === cardId);
-      if (card) {
+      if (card && card.isMatched === false) {
         card.isFlipped = !card.isFlipped;
         state.flippedCards.push(card);
       }
@@ -89,7 +89,7 @@ const gameSlice = createSlice({
       }
     },
     checkGameState: (state) => {
-      if (state.cards.every((card) => card.isMatched)) {
+      if (state.cards.length === state.matchCards.length) {
         state.gameState = "finished";
       }
     },
