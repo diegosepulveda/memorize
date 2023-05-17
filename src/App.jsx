@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { setPlayerName, fetchCards } from "./redux/gameSlice";
 import GameBoard from "./components/GameBoard";
 import ScoreBoard from "./components/ScoreBoard";
@@ -7,7 +7,6 @@ import ScoreBoard from "./components/ScoreBoard";
 function App() {
   const [name, setName] = useState("");
   const [gameStart, setGameStart] = useState(false);
-  const playerName = useSelector((state) => state.game.playerName);
   const dispatch = useDispatch();
 
   // Fetch cards on component mount
@@ -43,7 +42,7 @@ function App() {
 
   return (
     <div className="App min-h-screen bg-gray-100 flex flex-col items-center justify-center">
-      <h1 className="text-3xl mb-4">Welcome, {playerName}!</h1>
+      <h1 className="text-3xl mb-4">Memory Game</h1>
       <ScoreBoard />
       <GameBoard />
     </div>
