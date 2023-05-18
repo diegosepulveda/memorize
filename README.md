@@ -2,6 +2,10 @@
 
 Welcome to this fabulous, mind-boggling Memory Card Game. It's not just an ordinary card game, but a path to test your memory limits and have fun! 😉
 
+## 🎮 DEMO
+
+https://memorize-1.web.app/
+
 ## 🚀 Getting Started
 
 1. Clone this repository:
@@ -58,3 +62,11 @@ Unit tests are provided to ensure the logic and components work as expected. Run
 ```
 npm test
 ```
+
+## 🤩 On The Horizon, following features! 🎢
+
+Hold onto your hats because we've got some thrilling new features in the pipeline that are sure to shake things up:
+
+🎚 Levels of Adventure: Soon, you'll have the chance to pick your own level of difficulty. Are you a casual gamer or a card-matching maestro? You decide!
+
+⏱ Race Against the Clock: Feel the adrenaline rush as we add a new dimension to the game: Time! A ticking timer is joining the party soon, and it's got a penchant for suspense. Race against the clock and discover how quickly you can match those cards. Hone your speed and agility and set new records. Time waits for no one, not even in a memory game! ⏰🏁
