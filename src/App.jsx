@@ -1,17 +1,20 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setPlayerName, fetchCards } from "./redux/gameSlice";
 import GameBoard from "./components/GameBoard";
 import ScoreBoard from "./components/ScoreBoard";
 
 function App() {
   const [name, setName] = useState("");
+  const { playerName } = useSelector((state) => state.game);
+
   const [gameStart, setGameStart] = useState(false);
   const dispatch = useDispatch();
 
   // Fetch cards on component mount
   useEffect(() => {
     dispatch(fetchCards());
+    setName(playerName);
   }, [dispatch]);
 
   const handleStart = () => {
@@ -32,7 +35,10 @@ function App() {
         />
         <button
           onClick={handleStart}
-          className="bg-blue-500 text-white p-2 rounded"
+          disabled={name.length === 0 ? true : false}
+          className={`${
+            name.length === 0 ? "bg-blue-200" : "bg-blue-500"
+          } text-white p-2 rounded`}
         >
           Start Game
         </button>
