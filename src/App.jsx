@@ -22,7 +22,7 @@ function App() {
   if (!gameStart) {
     return (
       <div className="App min-h-screen bg-gray-100 flex flex-col items-center justify-center">
-        <h1 className="text-3xl mb-4">Welcome to Memory Game</h1>
+        <h1 className="text-3xl mb-4">Welcome to Memory Game </h1>
         <input
           type="text"
           value={name}
@@ -42,7 +42,7 @@ function App() {
 
   return (
     <div className="App min-h-screen bg-gray-100 flex flex-col items-center justify-center">
-      <h1 className="text-3xl mb-4">Memory Game</h1>
+      <h1 className="text-3xl mb-4">Memory Game 🧠</h1>
       <ScoreBoard />
       <GameBoard />
     </div>

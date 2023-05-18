@@ -32,7 +32,27 @@
     font-weight: 700;
     text-align: center;
     padding: 1rem;
-    background-color: #edf2f7;
+    /* background-color: #edf2f7; */
     border-radius: 0.5rem;
+  }
+
+  @keyframes winnerBanner {
+    0% {
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  .winner-banner {
+    animation: winnerBanner 1s ease-in-out;
+    animation-fill-mode: forwards;
   }
   

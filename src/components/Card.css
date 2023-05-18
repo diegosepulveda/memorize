@@ -1,0 +1,48 @@
+.card {
+  perspective: 500px;
+}
+
+.content {
+  position: relative;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+}
+
+.front {
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: white;
+  line-height: 300px;
+  color: #03446a;
+  text-align: center;
+  font-size: 60px;
+  border-radius: 5px;
+  backface-visibility: hidden;
+}
+
+.back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  color: #03446a;
+  text-align: center;
+  font-size: 60px;
+  border-radius: 5px;
+  color: white;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+    20%, 40%, 60%, 80% { transform: translateX(10px); }
+    100% { transform: translateX(0); }
+  }
+  
+  .shake {
+    animation: shake 1s;
+  }

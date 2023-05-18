@@ -12,6 +12,7 @@ export const fetchCards = createAsyncThunk("game/fetchCards", async () => {
 const gameSlice = createSlice({
   name: "game",
   initialState: {
+    loading: false,
     playerName: localStorage.getItem("playerName") || "",
     score: {
       success: 0,
@@ -28,14 +29,22 @@ const gameSlice = createSlice({
       localStorage.setItem("playerName", action.payload);
     },
     flipCard: (state, action) => {
+      state.loading = true;
       const cardId = action.payload;
       const card = state.cards.find((card) => card.uuid === cardId);
       if (card && card.isMatched === false) {
         card.isFlipped = !card.isFlipped;
-        state.flippedCards.push(card);
+        if (card.isFlipped) {
+          state.flippedCards.push(card);
+        } else {
+          state.flippedCards = state.flippedCards.filter(
+            (c) => c.uuid !== cardId
+          );
+        }
       }
     },
     checkMatch: (state) => {
+      state.loading = false;
       if (state.flippedCards.length === 2) {
         const [c1, c2] = state.flippedCards;
         const card1 = state.cards.find((card) => card.uuid === c1.uuid);
