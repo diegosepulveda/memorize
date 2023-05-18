@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { flipCard, checkMatch, checkGameState } from "../redux/gameSlice";
@@ -48,5 +49,15 @@ function Card({ card }) {
     </div>
   );
 }
+
+Card.propTypes = {
+  card: PropTypes.shape({
+    uuid: PropTypes.string.isRequired,
+    isFlipped: PropTypes.bool.isRequired,
+    isMatched: PropTypes.bool.isRequired,
+    url: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default Card;
