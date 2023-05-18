@@ -32,7 +32,11 @@ function Card({ card }) {
           transition: "transform 0.5s",
         }}
       >
-        <div className="front card__placeholder flex items-center justify-center bg-black w-32 h-32 rounded text-white text-2xl">
+        <div
+          className={`front card__placeholder flex items-center justify-center w-32 h-32 rounded text-white text-2xl ${
+            loading ? "bg-gray-900" : "bg-black"
+          }`}
+        >
           ?
         </div>
         <img
