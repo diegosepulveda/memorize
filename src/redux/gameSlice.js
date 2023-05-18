@@ -55,7 +55,7 @@ const gameSlice = createSlice({
           state.score.success += 1;
         } else {
           card1.isFlipped = card2.isFlipped = false;
-          state.score.error -= 1;
+          state.score.error += 1;
         }
         state.flippedCards = [];
       }
