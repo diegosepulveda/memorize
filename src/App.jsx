@@ -7,7 +7,6 @@ import ScoreBoard from "./components/ScoreBoard";
 function App() {
   const [name, setName] = useState("");
   const { playerName } = useSelector((state) => state.game);
-
   const [gameStart, setGameStart] = useState(false);
   const dispatch = useDispatch();
 
@@ -25,13 +24,20 @@ function App() {
   if (!gameStart) {
     return (
       <div className="App min-h-screen bg-gradient-to-b from-green-400 to-blue-500 flex flex-col items-center justify-center text-white px-4 md:px-0">
-        <h1 className="text-4xl md:text-5xl mb-4 font-extrabold md:w-[350px]">
+        <h1
+          tabIndex="0"
+          className="text-4xl md:text-5xl mb-4 font-extrabold md:w-[350px]"
+        >
           Welcome to Memory Game{" "}
         </h1>
-        <h5 className="mb-4 text-left w-full md:w-[350px] ">
-          👋 Hi there, whats your name?
+        <h5 tabIndex="0" className="mb-4 text-left w-full md:w-[350px] ">
+          👋 Hi there, what's your name?
         </h5>
+        <label htmlFor="playerName" className="sr-only">
+          Player Name
+        </label>
         <input
+          id="playerName"
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -52,8 +58,10 @@ function App() {
   }
 
   return (
-    <div className="App min-h-screen  flex flex-col items-center justify-center ">
-      <h1 className="text-3xl mb-4">Memory Game 🧠</h1>
+    <div className="App min-h-screen flex flex-col items-center justify-center ">
+      <h1 tabIndex="0" className="text-3xl mb-4">
+        Memory Game 🧠
+      </h1>
       <ScoreBoard />
       <GameBoard />
     </div>

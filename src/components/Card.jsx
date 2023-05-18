@@ -9,14 +9,18 @@ function Card({ card }) {
   const { loading } = useSelector((state) => state.game);
 
   const handleCardClick = () => {
-    dispatch(flipCard(card.uuid));
+    if (!loading) {
+      dispatch(flipCard(card.uuid));
+    }
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      dispatch(checkMatch());
-      dispatch(checkGameState());
-    }, 1000);
+    if (card.isFlipped) {
+      setTimeout(() => {
+        dispatch(checkMatch());
+        dispatch(checkGameState());
+      }, 1000);
+    }
   }, [card.isFlipped, dispatch]);
 
   return (
@@ -24,7 +28,10 @@ function Card({ card }) {
       className={`card p-2 m-2 shadow rounded tilt-shaking ${
         card.isMatched ? "card_success__animation" : ""
       }`}
-      onClick={!loading ? handleCardClick : undefined}
+      onClick={handleCardClick}
+      role="button"
+      tabIndex="0"
+      aria-label={`Flip card ${card.title}`}
     >
       <div
         className="content"
@@ -43,7 +50,7 @@ function Card({ card }) {
         <img
           className="back card__image w-32 h-32 object-cover rounded"
           src={card.url}
-          alt={card.title}
+          alt={`Card picture representing ${card.title}`}
         />
       </div>
     </div>
