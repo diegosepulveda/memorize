@@ -20,8 +20,8 @@ function Card({ card }) {
 
   return (
     <div
-      className={`card p-4 m-2 shadow rounded tilt-shaking ${
-        card.isMatched ? "shake" : ""
+      className={`card p-2 m-2 shadow rounded tilt-shaking ${
+        card.isMatched ? "card_success__animation" : ""
       }`}
       onClick={!loading ? handleCardClick : undefined}
     >
