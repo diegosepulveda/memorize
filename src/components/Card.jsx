@@ -26,7 +26,7 @@ function Card({ card }) {
   return (
     <div
       className={`card p-2 m-2 shadow rounded tilt-shaking ${
-        card.isMatched ? "card_success__animation" : ""
+        card.isMatched ? "card--success" : ""
       }`}
       onClick={handleCardClick}
       role="button"
@@ -34,21 +34,21 @@ function Card({ card }) {
       aria-label={`Flip card ${card.title}`}
     >
       <div
-        className="content"
+        className="card__content"
         style={{
           transform: card.isFlipped ? "rotateY(180deg)" : "",
           transition: "transform 0.5s",
         }}
       >
         <div
-          className={`front card__placeholder flex items-center justify-center w-32 h-32 rounded text-white text-2xl ${
+          className={`card__front flex items-center justify-center w-32 h-32 rounded text-white text-2xl ${
             loading ? "bg-gray-900" : "bg-black"
           }`}
         >
           ?
         </div>
         <img
-          className="back card__image w-32 h-32 object-cover rounded"
+          className="card__back w-32 h-32 object-cover rounded"
           src={card.url}
           alt={`Card picture representing ${card.title}`}
         />
