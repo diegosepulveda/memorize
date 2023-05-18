@@ -19,7 +19,7 @@ function Card({ card }) {
       setTimeout(() => {
         dispatch(checkMatch());
         dispatch(checkGameState());
-      }, 1000);
+      }, 300);
     }
   }, [card.isFlipped, dispatch]);
 
@@ -42,7 +42,7 @@ function Card({ card }) {
       >
         <div
           className={`card__front flex items-center justify-center w-32 h-32 rounded text-white text-2xl ${
-            loading ? "bg-gray-900" : "bg-black"
+            loading ? "bg-gray-600" : "bg-black"
           }`}
         >
           ?
