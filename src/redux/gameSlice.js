@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { duplicateAndShuffleCards } from "../utils/utils";
 
 export const fetchCards = createAsyncThunk("game/fetchCards", async () => {
   const response = await fetch(
@@ -7,34 +8,6 @@ export const fetchCards = createAsyncThunk("game/fetchCards", async () => {
   const data = await response.json();
   return data.entries.slice(-4);
 });
-
-function findDuplicateCard(cards) {
-  const sortedList = cards.map((card) => card.title).sort();
-  for (let i = 0; i < sortedList.length - 1; i++) {
-    if (sortedList[i] === sortedList[i + 1]) {
-      return cards.find((card) => card.title === sortedList[i]);
-    }
-  }
-  return null;
-}
-
-function duplicateAndShuffleCards(cards) {
-  const duplicatedCards = cards.flatMap((card) => [
-    card,
-    { ...card, uuid: card.uuid + "_2" },
-  ]);
-
-  // Shuffle
-  // for (let i = duplicatedCards.length - 1; i > 0; i--) {
-  //   const j = Math.floor(Math.random() * (i + 1));
-  //   [duplicatedCards[i], duplicatedCards[j]] = [
-  //     duplicatedCards[j],
-  //     duplicatedCards[i],
-  //   ];
-  // }
-
-  return duplicatedCards;
-}
 
 const gameSlice = createSlice({
   name: "game",
@@ -63,29 +36,19 @@ const gameSlice = createSlice({
       }
     },
     checkMatch: (state) => {
-      if (state.flippedCards.length >= 2) {
-        const repeatedCard = findDuplicateCard(state.flippedCards);
-        if (repeatedCard) {
+      if (state.flippedCards.length === 2) {
+        const [c1, c2] = state.flippedCards;
+        const card1 = state.cards.find((card) => card.uuid === c1.uuid);
+        const card2 = state.cards.find((card) => card.uuid === c2.uuid);
+        if (card1.url === card2.url) {
+          card1.isMatched = card2.isMatched = true;
+          state.matchCards.push(card1, card2);
           state.score.success += 1;
-          state.cards.forEach((card) => {
-            if (card.url === repeatedCard.url) {
-              card.isMatched = true;
-              state.matchCards.push(card);
-            }
-          });
-          state.flippedCards = state.flippedCards.filter(
-            (card) => card.url !== repeatedCard.url
-          );
-        } else if (state.flippedCards.length > 2) {
-          state.score.error += 1;
-          const [card1, card2] = state.flippedCards;
-          state.cards.forEach((card) => {
-            if (card.uuid === card1.uuid || card.uuid === card2.uuid) {
-              card.isFlipped = false;
-              state.flippedCards.shift();
-            }
-          });
+        } else {
+          card1.isFlipped = card2.isFlipped = false;
+          state.score.error -= 1;
         }
+        state.flippedCards = [];
       }
     },
     checkGameState: (state) => {

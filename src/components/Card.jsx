@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { flipCard, checkMatch, checkGameState } from "../redux/gameSlice";
 
@@ -6,10 +7,16 @@ function Card({ card }) {
 
   const handleCardClick = () => {
     dispatch(flipCard(card.uuid));
-    dispatch(checkMatch());
-    dispatch(checkGameState());
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(checkMatch());
+      dispatch(checkGameState());
+    }, 1000);
+  }, [card.isFlipped, dispatch]);
+
+  // https://codepen.io/edeesims/pen/wvpYWW
   return (
     <div className={`card p-4 m-2 shadow rounded`} onClick={handleCardClick}>
       {card.isFlipped ? (
